@@ -1,0 +1,122 @@
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 var(--spacing-8);
+  height: 64px;
+  background-color: var(--bg-surface);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border-color);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: var(--shadow-sm);
+}
+
+.navbar-left {
+  display: flex;
+  align-items: center;
+}
+
+.navbar-title {
+  margin: 0;
+  font-family: var(--font-heading);
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  text-shadow: var(--shadow-text);
+}
+
+.navbar-right {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-4);
+}
+
+.navbar-search {
+  width: 300px;
+}
+
+.icon-btn {
+  background: none;
+  border: none;
+  color: var(--text-secondary);
+  cursor: pointer;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  transition: all var(--transition-fast);
+}
+
+.icon-btn:hover {
+  background-color: rgba(0,0,0,0.05);
+  color: var(--text-primary);
+}
+
+[data-theme='dark'] .icon-btn:hover {
+  background-color: rgba(255,255,255,0.1);
+}
+
+.notification-badge {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  width: 8px;
+  height: 8px;
+  background-color: var(--status-error);
+  border-radius: 50%;
+  border: 2px solid var(--bg-primary);
+}
+
+.user-avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background-color: var(--bg-surface);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-dark);
+  cursor: pointer;
+  border: 1px solid var(--border-color);
+  box-shadow: var(--shadow-sm);
+  transition: all var(--transition-fast);
+}
+
+.user-avatar:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+.mobile-menu-btn {
+  display: none;
+  background: none;
+  border: none;
+  color: var(--text-primary);
+  cursor: pointer;
+  margin-right: 1rem;
+}
+
+@media (max-width: 1024px) {
+  .navbar {
+    padding: 0 var(--spacing-4);
+  }
+  
+  .mobile-menu-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .navbar-search {
+    display: none; /* Hide search bar on tablets & mobile to save space */
+  }
+  
+  .navbar-title {
+    font-size: 1.2rem;
+  }
+}

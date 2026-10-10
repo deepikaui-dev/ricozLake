@@ -1,0 +1,128 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model User {
+  id         String       @id @default(uuid())
+  email      String       @unique
+  password   String
+  name       String
+  phone      String?
+  avatar     String?
+  createdAt  DateTime     @default(now())
+  activities Activity[]
+  datasets   Dataset[]
+  favorites  Favorite[]
+  queries    SavedQuery[]
+  dataSources DataSource[]
+  apiKeys    ApiKey[]
+}
+
+model Dataset {
+  id          String           @id @default(uuid())
+  name        String
+  description String?
+  fileUrl     String
+  fileType    String
+  sizeBytes   Int
+  rowCount    Int
+  colCount    Int
+  status      String
+  ownerId     String
+  createdAt   DateTime         @default(now())
+  updatedAt   DateTime         @updatedAt
+  quality     DataQuality?
+  owner       User             @relation(fields: [ownerId], references: [id])
+  tags        DatasetTag[]
+  versions    DatasetVersion[]
+  favoritedBy Favorite[]
+  queries     SavedQuery[]
+}
+
+model DatasetTag {
+  id        String  @id @default(uuid())
+  name      String
+  datasetId String
+  dataset   Dataset @relation(fields: [datasetId], references: [id], onDelete: Cascade)
+}
+
+model Favorite {
+  userId    String
+  datasetId String
+  dataset   Dataset @relation(fields: [datasetId], references: [id], onDelete: Cascade)
+  user      User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@id([userId, datasetId])
+}
+
+model DatasetVersion {
+  id            String   @id @default(uuid())
+  versionNumber Int
+  fileUrl       String
+  description   String?
+  datasetId     String
+  createdAt     DateTime @default(now())
+  dataset       Dataset  @relation(fields: [datasetId], references: [id], onDelete: Cascade)
+}
+
+model DataQuality {
+  id            String   @id @default(uuid())
+  score         Float
+  missingValues Float
+  duplicateRows Int
+  datasetId     String   @unique
+  lastChecked   DateTime @default(now())
+  dataset       Dataset  @relation(fields: [datasetId], references: [id], onDelete: Cascade)
+}
+
+model SavedQuery {
+  id          String    @id @default(uuid())
+  name        String
+  queryConfig Json
+  lastRunAt   DateTime?
+  ownerId     String
+  targetId    String?
+  owner       User      @relation(fields: [ownerId], references: [id])
+  dataset     Dataset?  @relation(fields: [targetId], references: [id], onDelete: Cascade)
+}
+
+model Activity {
+  id        String   @id @default(uuid())
+  message   String
+  type      String
+  status    String
+  userId    String
+  createdAt DateTime @default(now())
+  user      User     @relation(fields: [userId], references: [id])
+}
+
+model DataSource {
+  id          String   @id @default(uuid())
+  name        String
+  type        String
+  host        String
+  port        Int?
+  database    String?
+  username    String?
+  password    String?
+  status      String   @default("Connected")
+  lastSync    DateTime @default(now())
+  ownerId     String
+  owner       User     @relation(fields: [ownerId], references: [id])
+  createdAt   DateTime @default(now())
+}
+
+model ApiKey {
+  id         String    @id @default(uuid())
+  name       String
+  key        String    @unique
+  keyPrefix  String
+  userId     String
+  user       User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  lastUsedAt DateTime?
+  createdAt  DateTime  @default(now())
+}

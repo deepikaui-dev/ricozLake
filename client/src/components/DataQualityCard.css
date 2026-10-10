@@ -1,0 +1,25 @@
+.dq-card {
+  position: relative;
+}
+
+.dq-score-pill {
+  padding: 4px 12px;
+  border-radius: 16px;
+  font-size: 0.875rem;
+  font-weight: 600;
+}
+
+.dq-good .dq-score-pill { 
+  background-color: rgba(5, 150, 105, 0.1); 
+  color: var(--status-success); 
+}
+
+.dq-warning .dq-score-pill { 
+  background-color: rgba(217, 119, 6, 0.1); 
+  color: var(--status-warning); 
+}
+
+.dq-poor .dq-score-pill { 
+  background-color: rgba(220, 38, 38, 0.1); 
+  color: var(--status-error); 
+}

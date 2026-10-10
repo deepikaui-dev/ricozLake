@@ -1,0 +1,128 @@
+.sidebar {
+  width: 260px;
+  background-color: var(--bg-sidebar);
+  border-right: 1px solid var(--border-color);
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 50;
+  color: var(--text-sidebar);
+}
+
+.sidebar-header {
+  padding: var(--spacing-5) var(--spacing-6);
+  border-bottom: 1px solid var(--border-color);
+  display: flex;
+  align-items: center;
+}
+
+.logo-container {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-3);
+  color: var(--text-sidebar);
+}
+
+.logo-text {
+  font-family: var(--font-heading);
+  font-size: 1.75rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+.sidebar-nav {
+  flex: 1;
+  overflow-y: auto;
+  padding: var(--spacing-4) var(--spacing-3);
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-5);
+}
+
+.nav-section {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.nav-section-title {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text-sidebar-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 0 var(--spacing-3);
+  margin-bottom: var(--spacing-2);
+}
+
+.nav-item {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-3);
+  padding: var(--spacing-2) var(--spacing-3);
+  border-radius: var(--radius-md);
+  color: var(--text-sidebar);
+  text-decoration: none;
+  font-size: 1.1rem;
+  font-weight: 500;
+  transition: all var(--transition-fast);
+}
+
+.nav-item:hover {
+  background-color: var(--border-highlight);
+  color: var(--text-primary);
+}
+
+.nav-item.active {
+  background-color: var(--border-highlight);
+  color: var(--text-primary);
+  font-weight: 600;
+  border-left: 3px solid var(--accent-secondary);
+}
+
+.sidebar-footer {
+  padding: var(--spacing-4);
+  border-top: 1px solid var(--border-color);
+  background-color: transparent;
+}
+
+.logout-btn {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-3);
+  width: 100%;
+  padding: var(--spacing-2) var(--spacing-3);
+  border-radius: var(--radius-md);
+  color: #ffa3a3;
+  background: none;
+  border: none;
+  font-size: 1.1rem;
+  font-family: inherit;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.logout-btn:hover {
+  background-color: rgba(220, 38, 38, 0.15);
+}
+
+@media (max-width: 1024px) {
+  .sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    transform: translateX(-100%);
+    transition: transform 0.3s ease-in-out;
+    z-index: 20;
+    box-shadow: 2px 0 10px rgba(0,0,0,0.1);
+  }
+
+  .sidebar.open {
+    transform: translateX(0);
+  }
+}

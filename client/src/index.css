@@ -1,0 +1,193 @@
+@import url('https://fonts.googleapis.com/css2?family=Caveat:wght@400;500;600;700&family=Nunito:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap');
+
+:root {
+  /* DARK THEME */
+  --bg-primary: #0B0D11; 
+  --bg-secondary: #0B0D11; 
+  --bg-surface: #191C26; 
+  --bg-surface-hover: #1F1D2E;
+  
+  --bg-sidebar: #1F1D2E; 
+  --bg-corkboard: #191C26; 
+  
+  /* Text */
+  --text-light: #FFFFFF;
+  --text-light-muted: #9CA3AF;
+  
+  --text-dark: #FFFFFF; 
+  --text-dark-secondary: #D1D5DB;
+  --text-dark-muted: #9CA3AF;
+  
+  /* Default page text */
+  --text-primary: var(--text-dark);
+  --text-secondary: var(--text-dark-secondary);
+  --text-muted: var(--text-dark-muted);
+  
+  /* Sidebar Text */
+  --text-sidebar: #F3F4F6;
+  --text-sidebar-muted: #9CA3AF;
+
+  --border-color: rgba(255, 255, 255, 0.1);
+  --border-highlight: rgba(255, 255, 255, 0.2);
+  
+  /* Primary Accents */
+  --accent-primary: #5B2B79; 
+  --accent-primary-hover: #6e3492;
+  --accent-secondary: #2D447A; 
+  --accent-glow: rgba(91, 43, 121, 0.4);
+  
+  /* Status Colors */
+  --status-success: #10B981; 
+  --status-warning: #F59E0B; 
+  --status-error: #EF4444; 
+  --status-info: #3B82F6;
+
+  /* Spacing */
+  --spacing-1: 0.25rem;
+  --spacing-2: 0.5rem;
+  --spacing-3: 0.75rem;
+  --spacing-4: 1rem;
+  --spacing-5: 1.5rem;
+  --spacing-6: 2rem;
+  --spacing-8: 3rem;
+
+  /* Border Radius */
+  --radius-sm: 2px;
+  --radius-md: 4px;
+  --radius-lg: 8px;
+  --radius-xl: 12px;
+
+  /* Elevation Shadows - Sharper for better crispness */
+  --shadow-sm: 0 1px 2px rgba(0,0,0,0.08);
+  --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -1px rgba(0,0,0,0.06);
+  --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.1), 0 4px 6px -2px rgba(0,0,0,0.05);
+  --shadow-text: none;
+  
+  /* Transitions */
+  --transition-fast: 0.15s ease;
+  --transition-normal: 0.2s ease-out;
+
+  /* Fonts */
+  --font-body: 'Nunito', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-heading: 'Nunito', sans-serif;
+  --font-handwriting: 'Caveat', cursive;
+}
+
+[data-theme='light'] {
+  /* LIGHT THEME (Elegant Gold & White) */
+  --bg-primary: #F8FAFC; 
+  --bg-secondary: #F1F5F9; 
+  --bg-surface: #FFFFFF; 
+  --bg-surface-hover: #F8FAFC;
+  
+  --bg-sidebar: #FFFFFF; 
+  --bg-corkboard: #FFFFFF; 
+  
+  /* Text */
+  --text-light: #FFFFFF;
+  --text-light-muted: #E2E8F0;
+  
+  --text-dark: #0F172A; 
+  --text-dark-secondary: #475569;
+  --text-dark-muted: #94A3B8;
+  
+  /* Default page text */
+  --text-primary: var(--text-dark);
+  --text-secondary: var(--text-dark-secondary);
+  --text-muted: var(--text-dark-muted);
+  
+  /* Sidebar Text */
+  --text-sidebar: #0F172A;
+  --text-sidebar-muted: #64748B;
+
+  --border-color: #E2E8F0;
+  --border-highlight: #D4AF37;
+  
+  /* Primary Accents */
+  --accent-primary: #D4AF37; 
+  --accent-primary-hover: #B8962E;
+  --accent-secondary: #1E3A8A; 
+  --accent-glow: rgba(212, 175, 55, 0.4);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  max-width: 100vw;
+  overflow-x: hidden;
+}
+
+#root {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+body {
+  font-family: var(--font-body);
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  min-height: 100vh;
+  font-size: 1rem;
+}
+
+/* Typography elements */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+  color: var(--text-primary);
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+p {
+  color: var(--text-secondary);
+}
+
+a {
+  color: var(--accent-secondary);
+  text-decoration: none;
+  transition: color var(--transition-fast);
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* Form resets */
+input, button, textarea, select {
+  font-family: inherit;
+  color: inherit;
+}
+
+/* Animations */
+@keyframes slideUpFade {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.page-animate {
+  animation: slideUpFade var(--transition-normal);
+}
+
+/* Base Card styles */
+.card {
+  background-color: var(--bg-surface);
+  border: 1px solid var(--border-color);
+  box-shadow: var(--shadow-md);
+  border-radius: var(--radius-lg);
+  padding: var(--spacing-4);
+  color: var(--text-primary);
+  transition: transform var(--transition-normal), box-shadow var(--transition-normal);
+}
+
+.card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg);
+  border-color: var(--border-highlight);
+}
