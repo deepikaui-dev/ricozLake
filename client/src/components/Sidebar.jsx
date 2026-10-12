@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
-import { Home, Database, Activity, Settings, LogOut, FilePlus, Server, Bookmark, Moon, Sun } from 'lucide-react';
+import { Home, Database, Activity, Settings, LogOut, FilePlus, Server, Bookmark, Moon, Sun, Compass } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
+import { useTheme } from '../context/ThemeContext';
 import './Sidebar.css';
 
 export const Sidebar = ({ isOpen, setIsOpen }) => {
@@ -20,20 +21,7 @@ export const Sidebar = ({ isOpen, setIsOpen }) => {
     }
   };
 
-  const [isDark, setIsDark] = useState(() => {
-    const savedTheme = localStorage.getItem('ricoz_theme');
-    return savedTheme ? savedTheme === 'dark' : true;
-  });
-
-  useEffect(() => {
-    if (isDark) {
-      document.documentElement.removeAttribute('data-theme');
-      localStorage.setItem('ricoz_theme', 'dark');
-    } else {
-      document.documentElement.setAttribute('data-theme', 'light');
-      localStorage.setItem('ricoz_theme', 'light');
-    }
-  }, [isDark]);
+  const { isDark, toggleTheme } = useTheme();
 
   return (
     <aside className={`sidebar ${isOpen ? 'open' : ''}`}>
@@ -50,6 +38,10 @@ export const Sidebar = ({ isOpen, setIsOpen }) => {
           <NavLink to="/" onClick={handleNavClick} className={({isActive}) => isActive ? 'nav-item active' : 'nav-item'}>
             <Home size={18} />
             <span>Dashboard</span>
+          </NavLink>
+          <NavLink to="/onboarding" onClick={handleNavClick} className={({isActive}) => isActive ? 'nav-item active' : 'nav-item'}>
+            <Compass size={18} />
+            <span>Onboarding Portal</span>
           </NavLink>
         </div>
 
@@ -91,7 +83,7 @@ export const Sidebar = ({ isOpen, setIsOpen }) => {
       </nav>
 
       <div className="sidebar-footer" style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
-        <button className="nav-item" onClick={() => setIsDark(!isDark)} style={{ background: 'none', border: 'none', width: '100%', cursor: 'pointer', textAlign: 'left', color: 'var(--text-secondary)' }}>
+        <button className="nav-item" onClick={toggleTheme} style={{ background: 'none', border: 'none', width: '100%', cursor: 'pointer', textAlign: 'left', color: 'var(--text-secondary)' }}>
           {isDark ? <Sun size={18} /> : <Moon size={18} />}
           <span>{isDark ? 'Light Mode' : 'Dark Mode'}</span>
         </button>

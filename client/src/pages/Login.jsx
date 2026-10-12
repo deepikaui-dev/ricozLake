@@ -205,6 +205,25 @@ export const Login = () => {
       padding: '1rem'
     }}>
       <div style={{ width: '100%', maxWidth: '420px', animation: 'slideUpFade 0.4s ease-out' }}>
+        <div style={{ textAlign: 'left', marginBottom: '1rem' }}>
+          <button 
+            type="button" 
+            onClick={() => navigate('/onboarding')}
+            style={{ 
+              background: 'none', 
+              border: 'none', 
+              color: 'var(--text-secondary)', 
+              cursor: 'pointer', 
+              fontSize: '0.85rem', 
+              display: 'inline-flex', 
+              alignItems: 'center', 
+              gap: '0.4rem',
+              padding: 0
+            }}
+          >
+            ← Back to Ricoz Ecosystem & Onboarding
+          </button>
+        </div>
         <Card style={{ padding: '2rem' }}>
           <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
             <div style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center', width: '48px', height: '48px', backgroundColor: 'var(--bg-secondary)', border: '1px solid var(--border-color)', borderRadius: '12px', marginBottom: '1rem' }}>

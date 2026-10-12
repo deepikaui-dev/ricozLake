@@ -15,6 +15,9 @@ import { useAuth } from './context/AuthContext';
 import { Toaster } from 'react-hot-toast';
 import './index.css';
 
+import { Landing } from './pages/Landing';
+import { ThemeProvider } from './context/ThemeContext';
+
 const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
   const { token } = useAuth();
   if (!token) {
@@ -24,27 +27,36 @@ const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
 };
 
 function App() {
+  const { token } = useAuth();
+
   return (
-    <BrowserRouter>
-      <Toaster position="bottom-right" toastOptions={{ style: { background: 'var(--bg-surface)', color: 'var(--text-primary)', border: '1px solid var(--border-color)' } }} />
-      <Routes>
+    <ThemeProvider>
+      <BrowserRouter>
+        <Toaster position="bottom-right" toastOptions={{ style: { background: 'var(--bg-surface)', color: 'var(--text-primary)', border: '1px solid var(--border-color)' } }} />
+        <Routes>
+        {/* Public Informational Landing & Customer Onboarding Pages */}
+        <Route path="/onboarding" element={<Landing />} />
+        <Route path="/franchise" element={<Landing />} />
+        <Route path="/landing" element={<Landing />} />
         <Route path="/login" element={<Login />} />
         
-        <Route path="/" element={<ProtectedRoute><DashboardLayout /></ProtectedRoute>}>
-          <Route index element={<Dashboard />} />
-          <Route path="catalog" element={<Catalog />} />
-          <Route path="dataset/:id" element={<DatasetDetails />} />
-          <Route path="add-dataset" element={<AddDataset />} />
-          <Route path="data-sources" element={<DataSources />} />
-          <Route path="queries" element={<Queries />} />
-          <Route path="activity" element={<Activity />} />
-          <Route path="settings" element={<Settings />} />
-          <Route path="search" element={<GlobalSearch />} />
+        {/* Main Application with Smart Root */}
+        <Route path="/" element={token ? <DashboardLayout /> : <Landing />}>
+          <Route index element={token ? <Dashboard /> : null} />
+          <Route path="catalog" element={<ProtectedRoute><Catalog /></ProtectedRoute>} />
+          <Route path="dataset/:id" element={<ProtectedRoute><DatasetDetails /></ProtectedRoute>} />
+          <Route path="add-dataset" element={<ProtectedRoute><AddDataset /></ProtectedRoute>} />
+          <Route path="data-sources" element={<ProtectedRoute><DataSources /></ProtectedRoute>} />
+          <Route path="queries" element={<ProtectedRoute><Queries /></ProtectedRoute>} />
+          <Route path="activity" element={<ProtectedRoute><Activity /></ProtectedRoute>} />
+          <Route path="settings" element={<ProtectedRoute><Settings /></ProtectedRoute>} />
+          <Route path="search" element={<ProtectedRoute><GlobalSearch /></ProtectedRoute>} />
         </Route>
         
         <Route path="*" element={<Navigate to="/" />} />
       </Routes>
     </BrowserRouter>
+  </ThemeProvider>
   );
 }
 

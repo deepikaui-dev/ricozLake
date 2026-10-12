@@ -1,0 +1,62 @@
+/* ==========================================================================
+   Animated3DBackground Styles
+   High-Visibility, Hardware-Accelerated 3D Canvas Background Layer
+   Responsive across Mobile (320px) to 4K Ultra-wide (2560px+)
+   ========================================================================== */
+
+.rl-3d-bg-wrapper {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+  user-select: none;
+}
+
+.rl-3d-bg-canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Subtle atmospheric backdrop tint behind the 3D canvas (does not obscure the canvas) */
+.rl-3d-bg-gradient-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 0;
+  transition: background 0.3s ease;
+}
+
+.rl-3d-bg-gradient-overlay.dark {
+  background: radial-gradient(
+    circle at 50% 35%,
+    rgba(91, 43, 121, 0.18) 0%,
+    rgba(45, 68, 122, 0.12) 45%,
+    rgba(11, 13, 17, 0.05) 100%
+  );
+}
+
+.rl-3d-bg-gradient-overlay.light {
+  background: radial-gradient(
+    circle at 50% 35%,
+    rgba(212, 175, 55, 0.14) 0%,
+    rgba(59, 130, 246, 0.08) 50%,
+    rgba(248, 250, 252, 0.02) 100%
+  );
+}
