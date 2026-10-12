@@ -3,7 +3,8 @@ import { useNavigate } from 'react-router-dom';
 import { 
   Database, ArrowRight, CheckCircle2, ChevronDown, ChevronUp, 
   Layers, ShieldCheck, BarChart3, Server, X, Moon, Sun,
-  Table, FileSpreadsheet, Code2, AlertCircle, Play, Activity
+  Table, FileSpreadsheet, Code2, AlertCircle, Play, Activity,
+  Search, Lock
 } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 import { useTheme } from '../context/ThemeContext';
